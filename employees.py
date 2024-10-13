@@ -117,8 +117,10 @@ class Employee(ABC):
                   
     def daily_expense(self):
         self.savings -= DAILY_EXPENSE
-        self.happiness = max(self.happiness - 1, PERCENTAGE_MIN)
-            
+        if self.happiness - 1 < PERCENTAGE_MIN:
+            self.happiness = PERCENTAGE_MIN
+        else:
+            self.happiness -= 1            
     def __str__(self) -> str:
         return (f"{self.__name}\n"
                 f"\tSalary: ${self.salary}\n"
